@@ -54,7 +54,7 @@ def railway_deploy(
     _run(f"railway up -c".split())
 
 # %% ../nbs/api/09_cli.ipynb #cli-main
-def main(argv=None, _link=None, _deploy=None):
+def main(argv=None):
     "Run the FastHTML command line interface."
     parser = ArgumentParser()
     commands = parser.add_subparsers(required=True)
@@ -64,7 +64,7 @@ def main(argv=None, _link=None, _deploy=None):
     deploy = actions.add_parser('deploy', help='Deploy a FastHTML app to Railway')
     deploy.add_argument('name', help='Project name')
     deploy.add_argument('--mount', action=BooleanOptionalAction, default=True,
-                        help='Create a mounted volume at /app/data')
+        help='Create a mounted volume at /app/data')
     args = parser.parse_args(argv)
-    if args.action == 'link': return (_link or railway_link.__wrapped__)()
-    return (_deploy or railway_deploy.__wrapped__)(args.name, args.mount)
+    if args.action == 'link': return railway_link.__wrapped__()
+    return railway_deploy.__wrapped__(args.name, args.mount)
