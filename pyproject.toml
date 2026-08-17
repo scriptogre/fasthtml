@@ -26,6 +26,8 @@ dev = ['ipython', 'lxml', 'pysym2md>=0.0.6', 'monsterui', 'PyJWT', 'fastlite']
 
 
 [project.scripts]
+fasthtml = "fasthtml.cli:main"
+fh = "fasthtml.cli:main"
 fh_railway_link = "fasthtml.cli:railway_link"
 fh_railway_deploy = "fasthtml.cli:railway_deploy"
 
