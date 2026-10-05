@@ -689,7 +689,10 @@ class FastHTML(Starlette):
         before=None, after=None, surreal=True, htmx=True, htmx4=False, default_hdrs=True, sess_cls=SessionMiddleware,
         secret_key=None, session_cookie='session_', max_age=365*24*3600, sess_path='/',
         same_site='lax', sess_https_only=False, sess_domain=None, key_fname='.sesskey',
-        body_wrap=noop_body, htmlkw=None, nb_hdrs=False, canonical=True, max_part_size=DEF_MAXPART, **bodykw):
+        body_wrap=noop_body, htmlkw=None, nb_hdrs=False, canonical=True, max_part_size=DEF_MAXPART,
+        head_tags=None, footer_tags=None, htmx_extensions=None, html_attributes=None, **bodykw):
+        hdrs,ftrs = ifnone(head_tags, hdrs),ifnone(footer_tags, ftrs)
+        exts,htmlkw = ifnone(htmx_extensions, exts),ifnone(html_attributes, htmlkw)
         middleware,before,after = map(_list, (middleware,before,after))
         self.title,self.canonical,self.session_cookie,self.key_fname = title,canonical,session_cookie,key_fname
         hdrs,ftrs,exts = map(listify, (hdrs,ftrs,exts))
